@@ -1,11 +1,16 @@
 package bridge.utils;
 
 public class InputValidator {
-    private InputValidator() {}
+    private InputValidator() {
+    }
 
     public static void validateBridgeSizeInput(String bridgeSizeInputValue) {
         validateBridgeSizeType(bridgeSizeInputValue);
         validateBridgeSizeRange(convertToIntBridgeSize(bridgeSizeInputValue));
+    }
+
+    public static void validatePlayerMovingInput(String moving) {
+        isMovingInputUOrD(moving);
     }
 
     private static void validateBridgeSizeType(String bridgeSize) {
@@ -23,6 +28,13 @@ public class InputValidator {
         int minBridgeSize = BridgeSizeRange.MIN_BRIDGE_SIZE.getBridgeSize();
         int maxBridgeSize = BridgeSizeRange.MAX_BRIDGE_SIZE.getBridgeSize();
         if (bridgeSize < minBridgeSize || bridgeSize > maxBridgeSize) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static void isMovingInputUOrD(String moving) {
+        String movingRegex = "[UD]";
+        if (!moving.matches(movingRegex)) {
             throw new IllegalArgumentException();
         }
     }
