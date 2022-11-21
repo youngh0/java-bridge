@@ -8,12 +8,14 @@ import camp.nextstep.edu.missionutils.Console;
  */
 public class InputView {
 
-    /**
-     * 다리의 길이를 입력받는다.
-     */
     public int readBridgeSize() {
         String bridgeSize = Console.readLine();
-        InputValidator.validateBridgeSizeInput(bridgeSize);
+        try {
+            InputValidator.validateBridgeSizeInput(bridgeSize);
+        } catch (IllegalArgumentException exception) {
+            System.out.println("error");
+            readBridgeSize();
+        }
         return Integer.parseInt(bridgeSize);
     }
 
