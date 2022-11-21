@@ -20,7 +20,8 @@ class BridgeGameResultTest {
 
         new BridgeGame(bridge).move(0, "U", bridgeGameResult);
         StringBuffer currentResult = bridgeGameResult.getCurrentResult(1);
-        String answer = "[ O ]\n" + "[   ]\n";
+        System.out.println(currentResult);
+        String answer = "[ O ]\n[   ]";
 
         Assertions.assertThat(currentResult.toString()).isEqualTo(answer);
     }

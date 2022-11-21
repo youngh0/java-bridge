@@ -18,7 +18,7 @@ class BridgeGameResultTest {
     @Test
     void resetResultTest() {
         bridgeGameResult.resetResult();
-        String answer = "[   |   ]\n[   |   ]\n";
+        String answer = "[   |   ]\n[   |   ]";
 
         Assertions.assertThat(bridgeGameResult.getCurrentResult(2).toString()).isEqualTo(answer);
     }
