@@ -14,6 +14,10 @@ public class InputValidator {
         isMovingInputUOrD(moving);
     }
 
+    public static void validateGameCommandInput(String commandInput) {
+        isCommandInputValidation(commandInput);
+    }
+
     private static void validateBridgeSizeType(String bridgeSize) {
         String bridgeTypeRegex = "^[1-9][0-9]?$";
         if (!bridgeSize.matches(bridgeTypeRegex)) {
@@ -36,6 +40,13 @@ public class InputValidator {
     private static void isMovingInputUOrD(String moving) {
         String movingRegex = "[UD]";
         if (!moving.matches(movingRegex)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static void isCommandInputValidation(String command) {
+        String commandRegex = "[RQ]";
+        if (!command.matches(commandRegex)) {
             throw new IllegalArgumentException();
         }
     }
