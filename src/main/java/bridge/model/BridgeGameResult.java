@@ -1,5 +1,6 @@
 package bridge.model;
 
+import bridge.constant.GameConstants;
 import bridge.dto.FinalResultDto;
 import bridge.utils.BridgeGameResultStatus;
 
@@ -42,8 +43,8 @@ public class BridgeGameResult {
     }
 
     public StringBuffer getCurrentResult(int currentIndex) {
-        StringJoiner upBridgeResult = new StringJoiner(" | ", "[ ", " ]");
-        StringJoiner downBridgeResult = new StringJoiner(" | ", "[ ", " ]");
+        StringJoiner upBridgeResult = new StringJoiner(GameConstants.resultDelimiter, GameConstants.resultPrefix, GameConstants.resultPostfix);
+        StringJoiner downBridgeResult = new StringJoiner(GameConstants.resultDelimiter, GameConstants.resultPrefix, GameConstants.resultPostfix);
         for (int index = 0; index < currentIndex; index++) {
             upBridgeResult.add(upResult.get(index));
             downBridgeResult.add(downResult.get(index));
@@ -53,7 +54,7 @@ public class BridgeGameResult {
 
     public StringBuffer getFinalResult(int index, boolean isGameSuccess) {
         StringBuffer result = new StringBuffer();
-        result.append("최종 게임 결과\n");
+        result.append(GameConstants.finalResultMessage);
         result.append(getCurrentResult(index));
         StringBuffer finalResult = new FinalResultDto(isGameSuccess, gameTryCount).getFinalResult();
         result.append(finalResult);
