@@ -3,6 +3,7 @@ package bridge.controller;
 import bridge.model.BridgeGame;
 import bridge.model.BridgeGameResult;
 import bridge.view.InputView;
+import bridge.view.OutputView;
 
 public class GamePlayController {
     InputView inputView = new InputView();
@@ -27,7 +28,7 @@ public class GamePlayController {
     }
 
     private void showCurrentResult(int index) {
-        System.out.println(bridgeGameResult.getCurrentResult(index));
+        new OutputView().printMap(bridgeGameResult.getCurrentResult(index));
     }
 
     private void progressPlayerMove(int moveIndex) {
@@ -37,7 +38,6 @@ public class GamePlayController {
             askReplay(moveIndex);
         }
     }
-
 
     private void askReplay(int moveIndex) {
         String gameCommand = inputView.readGameCommand();
