@@ -22,4 +22,12 @@ class InputValidatorTest {
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> InputValidator.validatePlayerMovingInput(moving));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"r", "q", "R ", ""})
+    @DisplayName("재시작 여부는 R,Q만 가능하다")
+    void validateCommandInputExceptionTest(String command) {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> InputValidator.validateGameCommandInput(command));
+    }
 }
