@@ -23,6 +23,7 @@ public class GamePlayController {
             moveIndex++;
             isGameClear(moveIndex);
         }
+        System.out.println(bridgeGameResult.showFinalResult(moveIndex, "성공"));
     }
 
     private void showCurrentResult(int index) {
@@ -44,7 +45,7 @@ public class GamePlayController {
             startGame();
             return;
         }
-        showCurrentResult(moveIndex);
+        System.out.println(bridgeGameResult.showFinalResult(moveIndex, "실패"));
         gameProgress = false;
     }
 

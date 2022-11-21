@@ -9,6 +9,7 @@ import java.util.List;
 public class BridgeGameResult {
     private final List<String> upResult;
     private final List<String> downResult;
+    private int gameTryCount = 0;
 
     public BridgeGameResult(int bridgeSize) {
         String[] initResult = new String[bridgeSize];
@@ -26,6 +27,7 @@ public class BridgeGameResult {
     }
 
     public void resetResult() {
+        gameTryCount++;
         for (int index = 0; index < upResult.size(); index++) {
             upResult.set(index, " ");
             downResult.set(index, " ");
@@ -41,5 +43,14 @@ public class BridgeGameResult {
         currentResult.append(String.join(" | ", downResult.subList(0, index)));
         currentResult.append(" ]\n");
         return currentResult;
+    }
+
+    public StringBuffer showFinalResult(int index, String isClear) {
+        StringBuffer result = new StringBuffer();
+        result.append("최종 게임 결과\n");
+        result.append(getCurrentResult(index));
+        result.append("\n").append("게임 성공 여부: ").append(isClear).append("\n");
+        result.append("총 시도한 횟수: ").append(gameTryCount);
+        return result;
     }
 }
