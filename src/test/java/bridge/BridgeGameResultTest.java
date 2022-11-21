@@ -1,5 +1,9 @@
 package bridge;
 
+import bridge.model.Bridge;
+import bridge.model.BridgeGame;
+import bridge.model.BridgeGameResult;
+import bridge.utils.BridgeNumberGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

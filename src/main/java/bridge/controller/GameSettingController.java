@@ -1,6 +1,10 @@
 package bridge.controller;
 
-import bridge.*;
+import bridge.model.Bridge;
+import bridge.model.BridgeGameResult;
+import bridge.BridgeMaker;
+import bridge.utils.BridgeNumberGenerator;
+import bridge.view.InputView;
 
 public class GameSettingController {
     public Bridge generateBridge(InputView inputView, BridgeNumberGenerator bridgeNumberGenerator) {

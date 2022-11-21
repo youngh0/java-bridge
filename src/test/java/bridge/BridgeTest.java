@@ -1,5 +1,7 @@
 package bridge;
 
+import bridge.model.Bridge;
+import bridge.utils.BridgeNumberGenerator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
