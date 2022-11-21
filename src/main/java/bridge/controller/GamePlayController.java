@@ -18,19 +18,25 @@ public class GamePlayController {
     public void startGame() {
         bridgeGameResult.resetResult();
         int moveIndex = 0;
-        while (gameProgress && bridgeGame.isClear(moveIndex)) {
-            boolean move = bridgeGame.move(moveIndex++, inputView.readMoving(), bridgeGameResult);
-            showCurrentResult(moveIndex);
-            if (move) {
-                continue;
-            }
-            askReplay(moveIndex);
+        while (gameProgress) {
+            progressPlayerMove(moveIndex);
+            moveIndex++;
+            isGameClear(moveIndex);
         }
     }
 
     private void showCurrentResult(int index) {
         System.out.println(bridgeGameResult.getCurrentResult(index));
     }
+
+    private void progressPlayerMove(int moveIndex) {
+        boolean isPossibleMove = bridgeGame.move(moveIndex++, inputView.readMoving(), bridgeGameResult);
+        showCurrentResult(moveIndex);
+        if (!isPossibleMove) {
+            askReplay(moveIndex);
+        }
+    }
+
 
     private void askReplay(int moveIndex) {
         String gameCommand = inputView.readGameCommand();
@@ -40,5 +46,11 @@ public class GamePlayController {
         }
         showCurrentResult(moveIndex);
         gameProgress = false;
+    }
+
+    private void isGameClear(int moveIndex) {
+        if (bridgeGame.isAllStep(moveIndex)) {
+            gameProgress = false;
+        }
     }
 }
