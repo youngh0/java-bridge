@@ -5,6 +5,7 @@ import bridge.utils.BridgeGameResultStatus;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class BridgeGameResult {
     private final List<String> upResult;
@@ -39,15 +40,14 @@ public class BridgeGameResult {
                 || downResult.get(downResult.size() - 1).equals(BridgeGameResultStatus.CORRECT.getResultStatus());
     }
 
-    public StringBuffer getCurrentResult(int index) {
-        StringBuffer currentResult = new StringBuffer();
-        currentResult.append("[ ");
-        currentResult.append(String.join(" | ", upResult.subList(0, index)));
-        currentResult.append(" ]\n");
-        currentResult.append("[ ");
-        currentResult.append(String.join(" | ", downResult.subList(0, index)));
-        currentResult.append(" ]\n");
-        return currentResult;
+    public StringBuffer getCurrentResult(int currentIndex) {
+        StringJoiner upBridgeResult = new StringJoiner(" | ", "[ ", " ]");
+        StringJoiner downBridgeResult = new StringJoiner(" | ", "[ ", " ]");
+        for (int index = 0; index < currentIndex; index++) {
+            upBridgeResult.add(upResult.get(index));
+            downBridgeResult.add(downResult.get(index));
+        }
+        return new StringBuffer().append(upBridgeResult).append("\n").append(downBridgeResult);
     }
 
     public StringBuffer getFinalResult(int index, boolean isGameSuccess) {
