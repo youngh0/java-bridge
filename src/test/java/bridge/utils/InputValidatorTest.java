@@ -5,8 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+@DisplayName("사용자 입력 값 유효서 검사")
 class InputValidatorTest {
-
     @ParameterizedTest
     @ValueSource(strings = {"q", "", "2", "21", "03"})
     @DisplayName("다리 길이는 3~20사이의 숫자인지 검사")
