@@ -45,7 +45,7 @@ public class BridgeGameResult {
         return currentResult;
     }
 
-    public StringBuffer showFinalResult(int index, String isClear) {
+    public StringBuffer getFinalResult(int index, String isClear) {
         StringBuffer result = new StringBuffer();
         result.append("최종 게임 결과\n");
         result.append(getCurrentResult(index));

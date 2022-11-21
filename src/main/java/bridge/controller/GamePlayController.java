@@ -24,7 +24,7 @@ public class GamePlayController {
             moveIndex++;
             isGameClear(moveIndex);
         }
-        System.out.println(bridgeGameResult.showFinalResult(moveIndex, "성공"));
+        showFinalResult(bridgeGameResult.getFinalResult(moveIndex, "성공"));
     }
 
     private void showCurrentResult(int index) {
@@ -45,7 +45,7 @@ public class GamePlayController {
             startGame();
             return;
         }
-        System.out.println(bridgeGameResult.showFinalResult(moveIndex, "실패"));
+        showFinalResult(bridgeGameResult.getFinalResult(moveIndex, "실패"));
         gameProgress = false;
     }
 
@@ -53,5 +53,9 @@ public class GamePlayController {
         if (bridgeGame.isAllStep(moveIndex)) {
             gameProgress = false;
         }
+    }
+
+    private void showFinalResult(StringBuffer result) {
+        new OutputView().printResult(result);
     }
 }
