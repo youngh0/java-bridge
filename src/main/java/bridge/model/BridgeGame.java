@@ -1,5 +1,6 @@
 package bridge.model;
 
+import bridge.utils.BridgeGameCommand;
 import bridge.utils.BridgeGameResultStatus;
 
 /**
@@ -22,6 +23,6 @@ public class BridgeGame {
     }
 
     public boolean retry(String gameCommand) {
-        return gameCommand.equals("R");
+        return gameCommand.equals(BridgeGameCommand.RETRY.getCommand());
     }
 }
