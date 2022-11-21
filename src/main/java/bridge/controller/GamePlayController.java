@@ -3,6 +3,8 @@ package bridge.controller;
 import bridge.factory.ViewFactory;
 import bridge.model.BridgeGame;
 import bridge.model.BridgeGameResult;
+import bridge.utils.input.PlayerMovingInput;
+import bridge.utils.input.RetryInput;
 
 public class GamePlayController {
     private final BridgeGame bridgeGame;
@@ -31,7 +33,7 @@ public class GamePlayController {
     }
 
     private void progressPlayerMove(int moveIndex) {
-        boolean isPossibleMove = bridgeGame.move(moveIndex++, ViewFactory.getInputView().readMoving(), bridgeGameResult);
+        boolean isPossibleMove = bridgeGame.move(moveIndex++, PlayerMovingInput.inputPlayerMoving(), bridgeGameResult);
         showCurrentResult(moveIndex);
         if (!isPossibleMove) {
             askReplay();
@@ -39,7 +41,7 @@ public class GamePlayController {
     }
 
     private void askReplay() {
-        String gameCommand = ViewFactory.getInputView().readGameCommand();
+        String gameCommand = RetryInput.inputRetry();
         if (bridgeGame.retry(gameCommand)) {
             startGame();
             return;
