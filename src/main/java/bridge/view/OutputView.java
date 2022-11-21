@@ -1,8 +1,10 @@
 package bridge.view;
 
+import bridge.constant.GameConstants;
+
 public class OutputView {
     public void printBridgeGameStart() {
-        System.out.println("다리 건너기 게임을 시작합니다.\n");
+        System.out.println(GameConstants.startGameMessage);
     }
 
     public void printMap(StringBuffer currentResult) {
