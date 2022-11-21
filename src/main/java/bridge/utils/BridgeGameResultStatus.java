@@ -2,7 +2,8 @@ package bridge.utils;
 
 public enum BridgeGameResultStatus {
     CORRECT("O"),
-    FAIL("X");
+    FAIL("X"),
+    EMPTY(" ");
 
     private final String resultStatus;
 

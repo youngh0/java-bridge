@@ -13,7 +13,7 @@ public class BridgeGameResult {
 
     public BridgeGameResult(int bridgeSize) {
         String[] initResult = new String[bridgeSize];
-        Arrays.fill(initResult, " ");
+        Arrays.fill(initResult, BridgeGameResultStatus.EMPTY.getResultStatus());
         upResult = new ArrayList<>(Arrays.asList(initResult));
         downResult = new ArrayList<>(Arrays.asList(initResult));
     }
@@ -29,13 +29,14 @@ public class BridgeGameResult {
     public void resetResult() {
         gameTryCount++;
         for (int index = 0; index < upResult.size(); index++) {
-            upResult.set(index, " ");
-            downResult.set(index, " ");
+            upResult.set(index, BridgeGameResultStatus.EMPTY.getResultStatus());
+            downResult.set(index, BridgeGameResultStatus.EMPTY.getResultStatus());
         }
     }
 
     public boolean isGameSuccess() {
-        return upResult.get(upResult.size() - 1).equals("O") || downResult.get(downResult.size() - 1).equals("O");
+        return upResult.get(upResult.size() - 1).equals(BridgeGameResultStatus.CORRECT.getResultStatus())
+                || downResult.get(downResult.size() - 1).equals(BridgeGameResultStatus.CORRECT.getResultStatus());
     }
 
     public StringBuffer getCurrentResult(int index) {
