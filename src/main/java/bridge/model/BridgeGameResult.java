@@ -5,11 +5,10 @@ import bridge.utils.BridgeGameResultStatus;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BridgeGameResult {
-    List<String> upResult;
-    List<String> downResult;
+    private final List<String> upResult;
+    private final List<String> downResult;
 
     public BridgeGameResult(int bridgeSize) {
         String[] initResult = new String[bridgeSize];
@@ -27,8 +26,10 @@ public class BridgeGameResult {
     }
 
     public void resetResult() {
-        this.upResult = resetResultValue(upResult);
-        this.downResult = resetResultValue(downResult);
+        for (int index = 0; index < upResult.size(); index++) {
+            upResult.set(index, " ");
+            downResult.set(index, " ");
+        }
     }
 
     public StringBuffer getCurrentResult(int index) {
@@ -40,11 +41,5 @@ public class BridgeGameResult {
         currentResult.append(String.join(" | ", downResult.subList(0, index)));
         currentResult.append(" ]\n");
         return currentResult;
-    }
-
-    private List<String> resetResultValue(List<String> result) {
-        return result.stream()
-                .map(x -> " ")
-                .collect(Collectors.toList());
     }
 }
