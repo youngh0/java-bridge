@@ -8,4 +8,8 @@ public class GameSettingController {
         BridgeMaker bridgeMaker = new BridgeMaker(bridgeNumberGenerator);
         return new Bridge(bridgeMaker.makeBridge(bridgeSize));
     }
+
+    public BridgeGameResult initGameResult(int bridgeSize) {
+        return new BridgeGameResult(bridgeSize);
+    }
 }
