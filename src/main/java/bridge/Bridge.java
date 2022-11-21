@@ -12,4 +12,8 @@ public class Bridge {
     public boolean isPassStep(int index, String playerMoving) {
         return bridge.get(index).equals(playerMoving);
     }
+
+    public int getBridgeSize() {
+        return bridge.size();
+    }
 }
