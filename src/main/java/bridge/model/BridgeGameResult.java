@@ -1,5 +1,6 @@
 package bridge.model;
 
+import bridge.dto.FinalResultDto;
 import bridge.utils.BridgeGameResultStatus;
 
 import java.util.ArrayList;
@@ -54,12 +55,8 @@ public class BridgeGameResult {
         StringBuffer result = new StringBuffer();
         result.append("최종 게임 결과\n");
         result.append(getCurrentResult(index));
-        result.append("\n").append("게임 성공 여부: ");
-        if (isGameSuccess) {
-            result.append("성공\n");
-        }
-        result.append("실패\n");
-        result.append("총 시도한 횟수: ").append(gameTryCount);
+        StringBuffer finalResult = new FinalResultDto(isGameSuccess, gameTryCount).getFinalResult();
+        result.append(finalResult);
         return result;
     }
 }
