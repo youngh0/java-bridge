@@ -18,7 +18,7 @@ class BridgeGameResultTest {
         Bridge bridge = new Bridge(bridgeMaker.makeBridge(4));
         BridgeGameResult bridgeGameResult = new BridgeGameResult(bridge.getBridgeSize());
 
-        new BridgeGame(bridge, bridgeGameResult).move(0, "U");
+        new BridgeGame(bridge).move(0, "U", bridgeGameResult);
         StringBuffer currentResult = bridgeGameResult.getCurrentResult(1);
         String answer = "[ O ]\n" + "[   ]\n";
 
