@@ -1,12 +1,21 @@
 package bridge.utils;
 
+import bridge.InputView;
+
 public class InputValidator {
+    private static final InputView inputView = new InputView();
+
     private InputValidator() {
     }
 
     public static void validateBridgeSizeInput(String bridgeSizeInputValue) {
-        validateBridgeSizeType(bridgeSizeInputValue);
-        validateBridgeSizeRange(convertToIntBridgeSize(bridgeSizeInputValue));
+        try {
+            validateBridgeSizeType(bridgeSizeInputValue);
+            validateBridgeSizeRange(convertToIntBridgeSize(bridgeSizeInputValue));
+        } catch (IllegalArgumentException exception) {
+            System.out.println("error");
+            inputView.readBridgeSize();
+        }
     }
 
     public static void validatePlayerMovingInput(String moving) {
