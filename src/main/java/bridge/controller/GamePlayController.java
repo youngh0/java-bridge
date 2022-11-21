@@ -3,11 +3,8 @@ package bridge.controller;
 import bridge.factory.ViewFactory;
 import bridge.model.BridgeGame;
 import bridge.model.BridgeGameResult;
-import bridge.view.InputView;
 
 public class GamePlayController {
-    InputView inputView = new InputView();
-    private final ViewFactory viewFactory;
     private final BridgeGame bridgeGame;
     private final BridgeGameResult bridgeGameResult;
     private boolean gameProgress = true;
@@ -15,7 +12,6 @@ public class GamePlayController {
     public GamePlayController(BridgeGame bridgeGame, BridgeGameResult bridgeGameResult) {
         this.bridgeGame = bridgeGame;
         this.bridgeGameResult = bridgeGameResult;
-        this.viewFactory = new ViewFactory();
     }
 
     public void startGame() {
@@ -30,11 +26,11 @@ public class GamePlayController {
     }
 
     private void showCurrentResult(int index) {
-        viewFactory.createOutputView().printMap(bridgeGameResult.getCurrentResult(index));
+        ViewFactory.getOutputView().printMap(bridgeGameResult.getCurrentResult(index));
     }
 
     private void progressPlayerMove(int moveIndex) {
-        boolean isPossibleMove = bridgeGame.move(moveIndex++, inputView.readMoving(), bridgeGameResult);
+        boolean isPossibleMove = bridgeGame.move(moveIndex++, ViewFactory.getInputView().readMoving(), bridgeGameResult);
         showCurrentResult(moveIndex);
         if (!isPossibleMove) {
             askReplay(moveIndex);
@@ -42,7 +38,7 @@ public class GamePlayController {
     }
 
     private void askReplay(int moveIndex) {
-        String gameCommand = inputView.readGameCommand();
+        String gameCommand = ViewFactory.getInputView().readGameCommand();
         if (bridgeGame.retry(gameCommand)) {
             startGame();
             return;
@@ -58,6 +54,6 @@ public class GamePlayController {
     }
 
     private void showFinalResult(StringBuffer result) {
-        viewFactory.createOutputView().printResult(result);
+        ViewFactory.getOutputView().printResult(result);
     }
 }
