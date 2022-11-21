@@ -8,6 +8,7 @@ public class GamePlayController {
     private final BridgeGame bridgeGame;
     private final BridgeGameResult bridgeGameResult;
     private boolean gameProgress = true;
+    private boolean isAllAnswer = false;
 
     public GamePlayController(BridgeGame bridgeGame, BridgeGameResult bridgeGameResult) {
         this.bridgeGame = bridgeGame;
@@ -17,12 +18,12 @@ public class GamePlayController {
     public void startGame() {
         bridgeGameResult.resetResult();
         int moveIndex = 0;
-        while (gameProgress) {
+        while (gameProgress && !isAllAnswer) {
             progressPlayerMove(moveIndex);
             moveIndex++;
-            isGameClear(moveIndex);
+            isAllAnswer = bridgeGameResult.isGameSuccess();
         }
-        showFinalResult(bridgeGameResult.getFinalResult(moveIndex, "성공"));
+        showFinalResult(bridgeGameResult.getFinalResult(moveIndex, isAllAnswer));
     }
 
     private void showCurrentResult(int index) {
@@ -33,24 +34,17 @@ public class GamePlayController {
         boolean isPossibleMove = bridgeGame.move(moveIndex++, ViewFactory.getInputView().readMoving(), bridgeGameResult);
         showCurrentResult(moveIndex);
         if (!isPossibleMove) {
-            askReplay(moveIndex);
+            askReplay();
         }
     }
 
-    private void askReplay(int moveIndex) {
+    private void askReplay() {
         String gameCommand = ViewFactory.getInputView().readGameCommand();
         if (bridgeGame.retry(gameCommand)) {
             startGame();
             return;
         }
-        showFinalResult(bridgeGameResult.getFinalResult(moveIndex, "실패"));
         gameProgress = false;
-    }
-
-    private void isGameClear(int moveIndex) {
-        if (bridgeGame.isAllStep(moveIndex)) {
-            gameProgress = false;
-        }
     }
 
     private void showFinalResult(StringBuffer result) {

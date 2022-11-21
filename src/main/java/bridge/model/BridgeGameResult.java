@@ -34,6 +34,10 @@ public class BridgeGameResult {
         }
     }
 
+    public boolean isGameSuccess() {
+        return upResult.get(upResult.size() - 1).equals("O") || downResult.get(downResult.size() - 1).equals("O");
+    }
+
     public StringBuffer getCurrentResult(int index) {
         StringBuffer currentResult = new StringBuffer();
         currentResult.append("[ ");
@@ -45,11 +49,15 @@ public class BridgeGameResult {
         return currentResult;
     }
 
-    public StringBuffer getFinalResult(int index, String isClear) {
+    public StringBuffer getFinalResult(int index, boolean isGameSuccess) {
         StringBuffer result = new StringBuffer();
         result.append("최종 게임 결과\n");
         result.append(getCurrentResult(index));
-        result.append("\n").append("게임 성공 여부: ").append(isClear).append("\n");
+        result.append("\n").append("게임 성공 여부: ");
+        if (isGameSuccess) {
+            result.append("성공\n");
+        }
+        result.append("실패\n");
         result.append("총 시도한 횟수: ").append(gameTryCount);
         return result;
     }
