@@ -43,6 +43,21 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 중간결과_테스트() {
+        assertRandomNumberInRangeTest(() -> {
+            run("3", "U", "D", "U");
+            assertThat(output()).contains(
+                    "[ O ]",
+                    "[   ]",
+                    "[ O |   ]",
+                    "[   | O ]",
+                    "[ O |   | O ]",
+                    "[   | O |   ]"
+            );
+        }, 1, 0, 1);
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() -> {
             runException("a");
