@@ -24,4 +24,8 @@ public class BridgeGame {
     public boolean retry(String gameCommand) {
         return gameCommand.equals("R");
     }
+
+    public boolean isClear(int currentStep) {
+        return currentStep >= bridge.getBridgeSize();
+    }
 }
