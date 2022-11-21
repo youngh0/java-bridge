@@ -1,12 +1,13 @@
 package bridge.controller;
 
+import bridge.factory.ViewFactory;
 import bridge.model.BridgeGame;
 import bridge.model.BridgeGameResult;
 import bridge.view.InputView;
-import bridge.view.OutputView;
 
 public class GamePlayController {
     InputView inputView = new InputView();
+    private final ViewFactory viewFactory;
     private final BridgeGame bridgeGame;
     private final BridgeGameResult bridgeGameResult;
     private boolean gameProgress = true;
@@ -14,6 +15,7 @@ public class GamePlayController {
     public GamePlayController(BridgeGame bridgeGame, BridgeGameResult bridgeGameResult) {
         this.bridgeGame = bridgeGame;
         this.bridgeGameResult = bridgeGameResult;
+        this.viewFactory = new ViewFactory();
     }
 
     public void startGame() {
@@ -28,7 +30,7 @@ public class GamePlayController {
     }
 
     private void showCurrentResult(int index) {
-        new OutputView().printMap(bridgeGameResult.getCurrentResult(index));
+        viewFactory.createOutputView().printMap(bridgeGameResult.getCurrentResult(index));
     }
 
     private void progressPlayerMove(int moveIndex) {
@@ -56,6 +58,6 @@ public class GamePlayController {
     }
 
     private void showFinalResult(StringBuffer result) {
-        new OutputView().printResult(result);
+        viewFactory.createOutputView().printResult(result);
     }
 }
