@@ -8,7 +8,7 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static OutputView getInputView() {
+    public static OutputView getOutputView() {
         if (outputview == null) {
             outputview = new OutputView();
         }
