@@ -13,4 +13,8 @@ public enum BridgeSizeRange {
     public int getBridgeSize() {
         return bridgeSize;
     }
+
+    public static boolean validateBridgeSizeRange(int bridgeSize) {
+        return bridgeSize < MIN_BRIDGE_SIZE.getBridgeSize() || bridgeSize > MAX_BRIDGE_SIZE.getBridgeSize();
+    }
 }

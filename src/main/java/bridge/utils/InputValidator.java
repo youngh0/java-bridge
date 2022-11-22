@@ -30,9 +30,7 @@ public class InputValidator {
     }
 
     private static void validateBridgeSizeRange(int bridgeSize) {
-        int minBridgeSize = BridgeSizeRange.MIN_BRIDGE_SIZE.getBridgeSize();
-        int maxBridgeSize = BridgeSizeRange.MAX_BRIDGE_SIZE.getBridgeSize();
-        if (bridgeSize < minBridgeSize || bridgeSize > maxBridgeSize) {
+        if (BridgeSizeRange.validateBridgeSizeRange(bridgeSize)) {
             throw new IllegalArgumentException();
         }
     }
