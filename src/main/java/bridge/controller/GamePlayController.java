@@ -7,34 +7,35 @@ import bridge.view.OutputView;
 
 public class GamePlayController {
     private final BridgeGame bridgeGame;
-    private final BridgeGameResult bridgeGameResult;
+    private final int bridgeSize;
 
     private boolean gameProgress = true;
     private boolean isAllAnswer = false;
+    private int gameTryCount = 0;
 
-    public GamePlayController(BridgeGame bridgeGame, BridgeGameResult bridgeGameResult) {
+    public GamePlayController(BridgeGame bridgeGame, int bridgeSize) {
         this.bridgeGame = bridgeGame;
-        this.bridgeGameResult = bridgeGameResult;
+        this.bridgeSize = bridgeSize;
     }
 
     public void startGame() {
-        bridgeGameResult.resetResult();
+        BridgeGameResult bridgeGameResult = new BridgeGameResult(bridgeSize);
+        gameTryCount++;
         int moveIndex = 0;
         while (gameProgress && !isAllAnswer) {
-            progressPlayerMove(moveIndex);
-            moveIndex++;
+            progressPlayerMove(moveIndex++, bridgeGameResult);
             isAllAnswer = bridgeGameResult.isGameSuccess();
         }
-        showFinalResult(bridgeGameResult.getFinalResult(moveIndex, isAllAnswer));
+        showFinalResult(bridgeGameResult.getFinalResult(isAllAnswer, gameTryCount));
     }
 
-    private void showCurrentResult(int index) {
-        OutputView.getInputView().printMap(bridgeGameResult.getCurrentResult(index));
+    private void showCurrentResult(BridgeGameResult bridgeGameResult) {
+        OutputView.getOutputView().printMap(bridgeGameResult.getCurrentResult());
     }
 
-    private void progressPlayerMove(int moveIndex) {
-        boolean isPossibleMove = bridgeGame.move(moveIndex++, InputView.getInputView().readMoving(), bridgeGameResult);
-        showCurrentResult(moveIndex);
+    private void progressPlayerMove(int moveIndex, BridgeGameResult bridgeGameResult) {
+        boolean isPossibleMove = bridgeGame.move(moveIndex, InputView.getInputView().readMoving(), bridgeGameResult);
+        showCurrentResult(bridgeGameResult);
         if (!isPossibleMove) {
             askReplay();
         }
@@ -50,6 +51,6 @@ public class GamePlayController {
     }
 
     private void showFinalResult(StringBuffer result) {
-        OutputView.getInputView().printResult(result);
+        OutputView.getOutputView().printResult(result);
     }
 }

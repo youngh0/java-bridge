@@ -9,7 +9,7 @@ import bridge.view.OutputView;
 
 public class GameSettingController {
     public Bridge generateBridge(BridgeNumberGenerator bridgeNumberGenerator) {
-        OutputView.getInputView().printBridgeGameStart();
+        OutputView.getOutputView().printBridgeGameStart();
         int bridgeSize = inputBridgeSize(InputView.getInputView());
         BridgeMaker bridgeMaker = new BridgeMaker(bridgeNumberGenerator);
         return new Bridge(bridgeMaker.makeBridge(bridgeSize));
@@ -20,7 +20,7 @@ public class GameSettingController {
             try {
                 return inputView.readBridgeSize();
             } catch (IllegalArgumentException exception) {
-                OutputView.getInputView().printErrorMessage(ExceptionMessage.BRIDGE_RANGE.getMessage());
+                OutputView.getOutputView().printErrorMessage(ExceptionMessage.BRIDGE_RANGE.getMessage());
             }
         }
     }

@@ -15,10 +15,10 @@ public class BridgeGame {
 
     public boolean move(int index, String playerMoving, BridgeGameResult bridgeGameResult) {
         if (bridge.isPassStep(index, playerMoving)) {
-            bridgeGameResult.addResult(index, BridgeGameResultStatus.CORRECT, playerMoving);
+            bridgeGameResult.addResult(BridgeGameResultStatus.CORRECT, playerMoving);
             return true;
         }
-        bridgeGameResult.addResult(index, BridgeGameResultStatus.FAIL, playerMoving);
+        bridgeGameResult.addResult(BridgeGameResultStatus.FAIL, playerMoving);
         return false;
     }
 

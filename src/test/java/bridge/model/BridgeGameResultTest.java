@@ -14,18 +14,9 @@ class BridgeGameResultTest {
 
     @BeforeEach
     void setUp() {
-        bridgeGameResult.addResult(0, BridgeGameResultStatus.CORRECT, BridgeStep.UP.getStep());
-        bridgeGameResult.addResult(1, BridgeGameResultStatus.CORRECT, BridgeStep.DOWN.getStep());
-        bridgeGameResult.addResult(2, BridgeGameResultStatus.CORRECT, BridgeStep.DOWN.getStep());
-    }
-
-    @Test
-    @DisplayName("게임 재시작 시 각 다리의 결과를 공백으로 초기화")
-    void resetResultTest() {
-        bridgeGameResult.resetResult();
-        String answer = "[   |   ]\n[   |   ]";
-
-        Assertions.assertThat(bridgeGameResult.getCurrentResult(2).toString()).isEqualTo(answer);
+        bridgeGameResult.addResult(BridgeGameResultStatus.CORRECT, BridgeStep.UP.getStep());
+        bridgeGameResult.addResult(BridgeGameResultStatus.CORRECT, BridgeStep.DOWN.getStep());
+        bridgeGameResult.addResult(BridgeGameResultStatus.CORRECT, BridgeStep.DOWN.getStep());
     }
 
     @Nested
@@ -34,8 +25,7 @@ class BridgeGameResultTest {
         @Test
         @DisplayName("다리의 마지막까지 건넌 경우")
         void isGameSuccessTest() {
-            BridgeGameResult bridgeGameResult = new BridgeGameResult(4);
-            bridgeGameResult.addResult(3, BridgeGameResultStatus.CORRECT, BridgeStep.UP.getStep());
+            bridgeGameResult.addResult(BridgeGameResultStatus.CORRECT, BridgeStep.UP.getStep());
 
             Assertions.assertThat(bridgeGameResult.isGameSuccess()).isEqualTo(true);
         }
@@ -52,7 +42,7 @@ class BridgeGameResultTest {
         @DisplayName("다리의 마지막 칸에서 잘못 고른 경우")
         void isGameSuccessWrongFailTest() {
             BridgeGameResult bridgeGameResult = new BridgeGameResult(4);
-            bridgeGameResult.addResult(3, BridgeGameResultStatus.FAIL, BridgeStep.UP.getStep());
+            bridgeGameResult.addResult(BridgeGameResultStatus.FAIL, BridgeStep.UP.getStep());
 
             Assertions.assertThat(bridgeGameResult.isGameSuccess()).isEqualTo(false);
         }
