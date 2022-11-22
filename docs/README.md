@@ -25,7 +25,8 @@
 - [X]  하드코딩 된 값 상수로 변경
 - [X]  예외처리하는 view를 controller에서 호출하도록 변경
 - [x]  테스트 코드에 있는 하드코딩 값 상수로 변경
-- [ ]  controller에서 객체 생성코드를 별도의 factory로 분리하기
-    - [ ] settingController에서 inputView, outputView, gameResult생성 중
-    - [ ] playController에서 inputView, outputView생성 중
+- [x]  view를 싱글톤으로 변경하기
+- [x]  controller에서 하고있는 객체 생성 분리
+    - [x] settingController에서 inputView, outputView, gameResult생성 중
+    - [x] playController에서 inputView, outputView생성 중
 - [ ]  게임 위, 아래 칸의 결과를 저장하는 List를 별도의 일급컬렉션으로 분리하기
