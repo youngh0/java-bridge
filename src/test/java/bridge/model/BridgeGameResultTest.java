@@ -1,6 +1,7 @@
 package bridge.model;
 
 import bridge.utils.BridgeGameResultStatus;
+import bridge.utils.BridgeStep;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,9 +14,9 @@ class BridgeGameResultTest {
 
     @BeforeEach
     void setUp() {
-        bridgeGameResult.addResult(0, BridgeGameResultStatus.CORRECT, "U");
-        bridgeGameResult.addResult(1, BridgeGameResultStatus.CORRECT, "D");
-        bridgeGameResult.addResult(2, BridgeGameResultStatus.CORRECT, "D");
+        bridgeGameResult.addResult(0, BridgeGameResultStatus.CORRECT, BridgeStep.UP.getStep());
+        bridgeGameResult.addResult(1, BridgeGameResultStatus.CORRECT, BridgeStep.DOWN.getStep());
+        bridgeGameResult.addResult(2, BridgeGameResultStatus.CORRECT, BridgeStep.DOWN.getStep());
     }
 
     @Test
@@ -34,7 +35,7 @@ class BridgeGameResultTest {
         @DisplayName("다리의 마지막까지 건넌 경우")
         void isGameSuccessTest() {
             BridgeGameResult bridgeGameResult = new BridgeGameResult(4);
-            bridgeGameResult.addResult(3, BridgeGameResultStatus.CORRECT, "U");
+            bridgeGameResult.addResult(3, BridgeGameResultStatus.CORRECT, BridgeStep.UP.getStep());
 
             Assertions.assertThat(bridgeGameResult.isGameSuccess()).isEqualTo(true);
         }
@@ -51,7 +52,7 @@ class BridgeGameResultTest {
         @DisplayName("다리의 마지막 칸에서 잘못 고른 경우")
         void isGameSuccessWrongFailTest() {
             BridgeGameResult bridgeGameResult = new BridgeGameResult(4);
-            bridgeGameResult.addResult(3, BridgeGameResultStatus.FAIL, "U");
+            bridgeGameResult.addResult(3, BridgeGameResultStatus.FAIL, BridgeStep.UP.getStep());
 
             Assertions.assertThat(bridgeGameResult.isGameSuccess()).isEqualTo(false);
         }
