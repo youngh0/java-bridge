@@ -30,7 +30,7 @@ public class BridgeGameResult {
 
     public StringBuffer getCurrentResult() {
         StringBuffer mapResult = new StringBuffer();
-        mapResult.append(upResult.getCurrentResult()).append("\n").append(downResult.getCurrentResult());
+        mapResult.append(upResult.getCurrentResult()).append("\n").append(downResult.getCurrentResult()).append("\n");
         return mapResult;
     }
 
