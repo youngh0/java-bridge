@@ -1,14 +1,16 @@
 package bridge.controller;
 
-import bridge.factory.ViewFactory;
 import bridge.model.BridgeGame;
 import bridge.model.BridgeGameResult;
-import bridge.utils.input.PlayerMovingInput;
-import bridge.utils.input.RetryInput;
+import bridge.view.InputView;
+import bridge.view.OutputView;
 
 public class GamePlayController {
     private final BridgeGame bridgeGame;
     private final BridgeGameResult bridgeGameResult;
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
+
     private boolean gameProgress = true;
     private boolean isAllAnswer = false;
 
@@ -29,11 +31,11 @@ public class GamePlayController {
     }
 
     private void showCurrentResult(int index) {
-        ViewFactory.getOutputView().printMap(bridgeGameResult.getCurrentResult(index));
+        outputView.printMap(bridgeGameResult.getCurrentResult(index));
     }
 
     private void progressPlayerMove(int moveIndex) {
-        boolean isPossibleMove = bridgeGame.move(moveIndex++, PlayerMovingInput.inputPlayerMoving(), bridgeGameResult);
+        boolean isPossibleMove = bridgeGame.move(moveIndex++, inputView.readMoving(), bridgeGameResult);
         showCurrentResult(moveIndex);
         if (!isPossibleMove) {
             askReplay();
@@ -41,7 +43,7 @@ public class GamePlayController {
     }
 
     private void askReplay() {
-        String gameCommand = RetryInput.inputRetry();
+        String gameCommand = inputView.readGameCommand();
         if (bridgeGame.retry(gameCommand)) {
             startGame();
             return;
@@ -50,6 +52,6 @@ public class GamePlayController {
     }
 
     private void showFinalResult(StringBuffer result) {
-        ViewFactory.getOutputView().printResult(result);
+        outputView.printResult(result);
     }
 }
