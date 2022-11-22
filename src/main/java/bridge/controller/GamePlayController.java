@@ -1,9 +1,8 @@
 package bridge.controller;
 
-import bridge.constant.ExceptionMessage;
 import bridge.model.BridgeGame;
 import bridge.model.BridgeGameResult;
-import bridge.view.InputView;
+import bridge.utils.InputService;
 import bridge.view.OutputView;
 
 public class GamePlayController {
@@ -40,7 +39,7 @@ public class GamePlayController {
     }
 
     private boolean progressPlayerMove(int moveIndex, BridgeGameResult bridgeGameResult) {
-        boolean isPossibleMove = bridgeGame.move(moveIndex, inputPlayerMove(InputView.getInputView()), bridgeGameResult);
+        boolean isPossibleMove = bridgeGame.move(moveIndex, InputService.getInputService().inputPlayerMoving(), bridgeGameResult);
         OutputView.getOutputView().printMap(bridgeGameResult.getCurrentResult());
         if (!isPossibleMove) {
             askReplay();
@@ -49,7 +48,7 @@ public class GamePlayController {
     }
 
     private void askReplay() {
-        String gameCommand = inputRetryCommand(InputView.getInputView());
+        String gameCommand = InputService.getInputService().inputRetryCommand();
         if (bridgeGame.retry(gameCommand)) {
             return;
         }
@@ -58,25 +57,5 @@ public class GamePlayController {
 
     private void showFinalResult(StringBuffer result) {
         OutputView.getOutputView().printResult(result);
-    }
-
-    private String inputPlayerMove(InputView inputView) {
-        while (true) {
-            try {
-                return inputView.readMoving();
-            } catch (IllegalArgumentException exception) {
-                OutputView.getOutputView().printErrorMessage(ExceptionMessage.MOVE.getMessage());
-            }
-        }
-    }
-
-    private String inputRetryCommand(InputView inputView) {
-        while (true) {
-            try {
-                return inputView.readGameCommand();
-            } catch (IllegalArgumentException exception) {
-                OutputView.getOutputView().printErrorMessage(ExceptionMessage.RETRY_INPUT.getMessage());
-            }
-        }
     }
 }

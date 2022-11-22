@@ -2,26 +2,15 @@ package bridge.controller;
 
 import bridge.BridgeMaker;
 import bridge.BridgeNumberGenerator;
-import bridge.constant.ExceptionMessage;
 import bridge.model.Bridge;
-import bridge.view.InputView;
+import bridge.utils.InputService;
 import bridge.view.OutputView;
 
 public class GameSettingController {
     public Bridge generateBridge(BridgeNumberGenerator bridgeNumberGenerator) {
         OutputView.getOutputView().printBridgeGameStart();
-        int bridgeSize = inputBridgeSize(InputView.getInputView());
+        int bridgeSize = InputService.getInputService().inputBridgeSize();
         BridgeMaker bridgeMaker = new BridgeMaker(bridgeNumberGenerator);
         return new Bridge(bridgeMaker.makeBridge(bridgeSize));
-    }
-
-    private int inputBridgeSize(InputView inputView) {
-        while (true) {
-            try {
-                return inputView.readBridgeSize();
-            } catch (IllegalArgumentException exception) {
-                OutputView.getOutputView().printErrorMessage(ExceptionMessage.BRIDGE_RANGE.getMessage());
-            }
-        }
     }
 }
