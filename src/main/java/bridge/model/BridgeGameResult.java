@@ -3,6 +3,7 @@ package bridge.model;
 import bridge.constant.GameConstants;
 import bridge.dto.FinalResultDto;
 import bridge.utils.BridgeGameResultStatus;
+import bridge.utils.BridgeStep;
 
 public class BridgeGameResult {
     private final BridgeStair upResult;
@@ -14,7 +15,7 @@ public class BridgeGameResult {
     }
 
     public void addResult(BridgeGameResultStatus stepResult, String direction) {
-        if (direction.equals("U")) {
+        if (direction.equals(BridgeStep.UP.getStep())) {
             upResult.addResult(stepResult);
             downResult.addResult(BridgeGameResultStatus.EMPTY);
             return;
