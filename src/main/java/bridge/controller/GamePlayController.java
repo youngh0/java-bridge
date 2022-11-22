@@ -1,5 +1,6 @@
 package bridge.controller;
 
+import bridge.constant.ExceptionMessage;
 import bridge.model.BridgeGame;
 import bridge.model.BridgeGameResult;
 import bridge.view.InputView;
@@ -34,7 +35,7 @@ public class GamePlayController {
     }
 
     private void progressPlayerMove(int moveIndex, BridgeGameResult bridgeGameResult) {
-        boolean isPossibleMove = bridgeGame.move(moveIndex, InputView.getInputView().readMoving(), bridgeGameResult);
+        boolean isPossibleMove = bridgeGame.move(moveIndex, inputPlayerMove(InputView.getInputView()), bridgeGameResult);
         showCurrentResult(bridgeGameResult);
         if (!isPossibleMove) {
             askReplay();
@@ -42,7 +43,7 @@ public class GamePlayController {
     }
 
     private void askReplay() {
-        String gameCommand = InputView.getInputView().readGameCommand();
+        String gameCommand = inputRetryCommand(InputView.getInputView());
         if (bridgeGame.retry(gameCommand)) {
             startGame();
             return;
@@ -52,5 +53,25 @@ public class GamePlayController {
 
     private void showFinalResult(StringBuffer result) {
         OutputView.getOutputView().printResult(result);
+    }
+
+    private String inputPlayerMove(InputView inputView) {
+        while (true) {
+            try {
+                return inputView.readMoving();
+            } catch (IllegalArgumentException exception) {
+                OutputView.getOutputView().printErrorMessage(ExceptionMessage.MOVE.getMessage());
+            }
+        }
+    }
+
+    private String inputRetryCommand(InputView inputView) {
+        while (true) {
+            try {
+                return inputView.readGameCommand();
+            } catch (IllegalArgumentException exception) {
+                OutputView.getOutputView().printErrorMessage(ExceptionMessage.RETRY_INPUT.getMessage());
+            }
+        }
     }
 }
