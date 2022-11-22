@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class BridgeStair {
-    private final List<String> currentResult;
+    private final List<BridgeGameResultStatus> currentResult;
     private final int bridgeSize;
 
     public BridgeStair(int bridgeSize) {
@@ -17,18 +17,18 @@ public class BridgeStair {
     }
 
     public void addResult(BridgeGameResultStatus stepResult) {
-        currentResult.add(stepResult.getResultStatus());
+        currentResult.add(stepResult);
     }
 
     public boolean isGameSuccess() {
         return currentResult.size() == bridgeSize
-                && currentResult.get(currentResult.size() - 1).equals(BridgeGameResultStatus.CORRECT.getResultStatus());
+                && currentResult.get(currentResult.size() - 1).equals(BridgeGameResultStatus.CORRECT);
     }
 
     public StringJoiner getCurrentResult() {
         StringJoiner bridgeResultMessage = new StringJoiner(GameConstants.resultDelimiter, GameConstants.resultPrefix, GameConstants.resultPostfix);
-        for (String result : currentResult) {
-            bridgeResultMessage.add(result);
+        for (BridgeGameResultStatus result : currentResult) {
+            bridgeResultMessage.add(result.getResultStatus());
         }
         return bridgeResultMessage;
     }
