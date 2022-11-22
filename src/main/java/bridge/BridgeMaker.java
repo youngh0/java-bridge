@@ -24,15 +24,12 @@ public class BridgeMaker {
     public List<String> makeBridge(int size) {
         List<String> bridge = new ArrayList<>();
         for (int index = 0; index < size; index++) {
-            bridge.add(generateBridgeStep());
+            if (bridgeNumberGenerator.generate() == BridgeStep.UP.getNumber()) {
+                bridge.add(BridgeStep.UP.getStep());
+                continue;
+            }
+            bridge.add(BridgeStep.DOWN.getStep());
         }
         return bridge;
-    }
-
-    private String generateBridgeStep() {
-        if (bridgeNumberGenerator.generate() == BridgeStep.UP.getNumber()) {
-            return BridgeStep.UP.getStep();
-        }
-        return BridgeStep.DOWN.getStep();
     }
 }
