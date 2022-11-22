@@ -32,4 +32,8 @@ public class BridgeStair {
         }
         return bridgeResultMessage;
     }
+
+    public void clearResult() {
+        currentResult.clear();
+    }
 }

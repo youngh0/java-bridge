@@ -41,4 +41,9 @@ public class BridgeGameResult {
         result.append(finalResult);
         return result;
     }
+
+    public void clearResult() {
+        upResult.clearResult();
+        downResult.clearResult();
+    }
 }

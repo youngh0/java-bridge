@@ -21,31 +21,36 @@ public class GamePlayController {
 
     public void startGame() {
         BridgeGameResult bridgeGameResult = new BridgeGameResult(bridgeSize);
-        gameTryCount++;
-        int moveIndex = 0;
         while (gameProgress && !isAllAnswer) {
-            progressPlayerMove(moveIndex++, bridgeGameResult);
-            isAllAnswer = bridgeGameResult.isGameSuccess();
+            bridgeGameResult.clearResult();
+            gameTryCount++;
+            progressOneLife(bridgeGameResult);
         }
         showFinalResult(bridgeGameResult.getFinalResult(isAllAnswer, gameTryCount));
     }
 
-    private void showCurrentResult(BridgeGameResult bridgeGameResult) {
-        OutputView.getOutputView().printMap(bridgeGameResult.getCurrentResult());
+
+    private void progressOneLife(BridgeGameResult bridgeGameResult) {
+        int moveIndex = 0;
+        boolean isPlay = true;
+        while (isPlay && !isAllAnswer) {
+            isPlay = progressPlayerMove(moveIndex++, bridgeGameResult);
+            isAllAnswer = bridgeGameResult.isGameSuccess();
+        }
     }
 
-    private void progressPlayerMove(int moveIndex, BridgeGameResult bridgeGameResult) {
+    private boolean progressPlayerMove(int moveIndex, BridgeGameResult bridgeGameResult) {
         boolean isPossibleMove = bridgeGame.move(moveIndex, inputPlayerMove(InputView.getInputView()), bridgeGameResult);
-        showCurrentResult(bridgeGameResult);
+        OutputView.getOutputView().printMap(bridgeGameResult.getCurrentResult());
         if (!isPossibleMove) {
             askReplay();
         }
+        return isPossibleMove;
     }
 
     private void askReplay() {
         String gameCommand = inputRetryCommand(InputView.getInputView());
         if (bridgeGame.retry(gameCommand)) {
-            startGame();
             return;
         }
         gameProgress = false;
