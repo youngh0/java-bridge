@@ -29,4 +29,4 @@
 - [x]  controller에서 하고있는 객체 생성 분리
     - [x] settingController에서 inputView, outputView, gameResult생성 중
     - [x] playController에서 inputView, outputView생성 중
-- [ ]  게임 위, 아래 칸의 결과를 저장하는 List를 별도의 일급컬렉션으로 분리하기
+- [x]  게임 위, 아래 칸의 결과를 저장하는 List를 별도의 일급컬렉션으로 분리하기
