@@ -3,6 +3,18 @@ package bridge.view;
 import bridge.constant.GameConstants;
 
 public class OutputView {
+    private static OutputView outputview = new OutputView();
+
+    private OutputView() {
+    }
+
+    public static OutputView getInputView() {
+        if (outputview == null) {
+            outputview = new OutputView();
+        }
+        return outputview;
+    }
+
     public void printBridgeGameStart() {
         System.out.println(GameConstants.startGameMessage);
     }

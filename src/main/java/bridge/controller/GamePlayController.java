@@ -8,8 +8,6 @@ import bridge.view.OutputView;
 public class GamePlayController {
     private final BridgeGame bridgeGame;
     private final BridgeGameResult bridgeGameResult;
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
 
     private boolean gameProgress = true;
     private boolean isAllAnswer = false;
@@ -31,11 +29,11 @@ public class GamePlayController {
     }
 
     private void showCurrentResult(int index) {
-        outputView.printMap(bridgeGameResult.getCurrentResult(index));
+        OutputView.getInputView().printMap(bridgeGameResult.getCurrentResult(index));
     }
 
     private void progressPlayerMove(int moveIndex) {
-        boolean isPossibleMove = bridgeGame.move(moveIndex++, inputView.readMoving(), bridgeGameResult);
+        boolean isPossibleMove = bridgeGame.move(moveIndex++, InputView.getInputView().readMoving(), bridgeGameResult);
         showCurrentResult(moveIndex);
         if (!isPossibleMove) {
             askReplay();
@@ -43,7 +41,7 @@ public class GamePlayController {
     }
 
     private void askReplay() {
-        String gameCommand = inputView.readGameCommand();
+        String gameCommand = InputView.getInputView().readGameCommand();
         if (bridgeGame.retry(gameCommand)) {
             startGame();
             return;
@@ -52,6 +50,6 @@ public class GamePlayController {
     }
 
     private void showFinalResult(StringBuffer result) {
-        outputView.printResult(result);
+        OutputView.getInputView().printResult(result);
     }
 }

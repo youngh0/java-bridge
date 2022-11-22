@@ -4,6 +4,18 @@ import bridge.utils.InputValidator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
+    private static InputView inputview = new InputView();
+
+    private InputView() {
+    }
+
+    public static InputView getInputView() {
+        if (inputview == null) {
+            inputview = new InputView();
+        }
+        return inputview;
+    }
+
     public int readBridgeSize() {
         System.out.println("다리의 길이를 입력해주세요. ");
         String bridgeSize = Console.readLine();
