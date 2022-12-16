@@ -13,4 +13,8 @@ public class Bridge {
     public boolean isCanMove(String playerMoving, int index) {
         return bridgeInfo.get(index).equals(playerMoving);
     }
+
+    public int getBridgeSize() {
+        return bridgeInfo.size();
+    }
 }

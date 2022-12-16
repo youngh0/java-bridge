@@ -31,6 +31,10 @@ public class GameResult {
         return new ResultDto(upStairResult, downStairResult);
     }
 
+    public boolean isLastStepAnswer() {
+        return upStairResult.get(upStairResult.size() - 1).equals("O") || downStairResult.get(downStairResult.size() - 1).equals("O");
+    }
+
     private void addEmptyElement() {
         upStairResult.add(" ");
         downStairResult.add(" ");

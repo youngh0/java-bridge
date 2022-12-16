@@ -39,4 +39,9 @@ public class BridgeGame {
     public ResultDto getResultDto() {
         return gameResult.getResultDto();
     }
+
+    public boolean isGameSuccess(Bridge bridge) {
+        return bridge.getBridgeSize() == gameResult.getCurrentStep() &&
+                gameResult.isLastStepAnswer();
+    }
 }
