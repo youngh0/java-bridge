@@ -1,5 +1,7 @@
 package bridge.domain;
 
+import bridge.dto.ResultDto;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,10 @@ public class GameResult {
             return;
         }
         updateDownStair(answer);
+    }
+
+    public ResultDto getResultDto() {
+        return new ResultDto(upStairResult, downStairResult);
     }
 
     private void addEmptyElement() {
