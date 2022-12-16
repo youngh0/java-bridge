@@ -20,6 +20,7 @@ public class BridgeController {
             BridgeLength bridgeLength = inputView.readBridgeSize();
             bridgeGame.makeBridge(bridgeLength);
         } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
             settingBridgeGame();
         }
     }
