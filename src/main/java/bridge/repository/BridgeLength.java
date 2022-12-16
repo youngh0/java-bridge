@@ -8,6 +8,10 @@ public class BridgeLength {
         this.bridgeLength = Integer.parseInt(bridgeLength);
     }
 
+    public int getBridgeLength() {
+        return bridgeLength;
+    }
+
     private void validate(String bridgeLength) {
         validateIsNumber(bridgeLength);
         validateLengthRange(Integer.parseInt(bridgeLength));
