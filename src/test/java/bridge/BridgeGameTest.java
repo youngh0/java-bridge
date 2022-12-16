@@ -25,5 +25,13 @@ class BridgeGameTest {
         Assertions.assertThat(bridgeGame.getTryCount()).isEqualTo(2);
     }
 
+    @Test
+    void 게임종료_여부_테스트() {
+        bridgeGame.move("U", bridge);
+        bridgeGame.move("D", bridge);
+        bridgeGame.move("D", bridge);
+        bridgeGame.move("U", bridge);
+        Assertions.assertThat(bridgeGame.isGameSuccess(bridge)).isTrue();
+    }
 
 }
