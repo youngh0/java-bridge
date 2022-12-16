@@ -10,15 +10,16 @@ import java.util.List;
  * 다리 건너기 게임을 관리하는 클래스
  */
 public class BridgeGame {
-    private Bridge bridge;
     private final GameResult gameResult;
 
     public BridgeGame() {
         this.gameResult = new GameResult();
     }
 
-    public void move(String playerMoving) {
-        bridge.isCanMove(playerMoving, gameResult.getCurrentStep());
+    public boolean move(String playerMoving, Bridge bridge) {
+        boolean move = bridge.isCanMove(playerMoving, gameResult.getCurrentStep());
+        gameResult.updateResult(playerMoving, move);
+        return move;
     }
 
     /**
@@ -29,10 +30,9 @@ public class BridgeGame {
     public void retry() {
     }
 
-    public void makeBridge(BridgeLength bridgeLength) {
+    public Bridge makeBridge(BridgeLength bridgeLength) {
         BridgeMaker bridgeMaker = new BridgeMaker(new BridgeRandomNumberGenerator());
         List<String> bridge = bridgeMaker.makeBridge(bridgeLength.getBridgeLength());
-        this.bridge = new Bridge(bridge);
-//        return new Bridge(bridge);
+        return new Bridge(bridge);
     }
 }
