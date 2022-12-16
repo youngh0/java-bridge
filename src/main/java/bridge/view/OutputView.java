@@ -4,8 +4,14 @@ package bridge.view;
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 public class OutputView {
+    private final String error = "[ERROR] %s";
+
     public void printGameStartLine() {
         System.out.println(PrintConstant.GAME_START.getPrintLine());
+    }
+
+    public void printErrorMessage(String message) {
+        System.out.println(String.format(error, message));
     }
 
     /**
