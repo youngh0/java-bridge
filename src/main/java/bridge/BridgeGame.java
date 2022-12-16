@@ -9,6 +9,7 @@ import java.util.List;
  * 다리 건너기 게임을 관리하는 클래스
  */
 public class BridgeGame {
+    private Bridge bridge;
 
     /**
      * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -26,9 +27,10 @@ public class BridgeGame {
     public void retry() {
     }
 
-    public Bridge makeBridge(BridgeLength bridgeLength) {
+    public void makeBridge(BridgeLength bridgeLength) {
         BridgeMaker bridgeMaker = new BridgeMaker(new BridgeRandomNumberGenerator());
         List<String> bridge = bridgeMaker.makeBridge(bridgeLength.getBridgeLength());
-        return new Bridge(bridge);
+        this.bridge = new Bridge(bridge);
+//        return new Bridge(bridge);
     }
 }
