@@ -9,4 +9,8 @@ public class Bridge {
     public Bridge(List<String> bridgeInfo) {
         this.bridgeInfo = Collections.unmodifiableList(bridgeInfo);
     }
+
+    public boolean isCanMove(String playerMoving, int index) {
+        return bridgeInfo.get(index).equals(playerMoving);
+    }
 }
