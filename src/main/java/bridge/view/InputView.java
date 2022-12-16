@@ -1,5 +1,6 @@
 package bridge.view;
 
+import bridge.repository.BridgeElement;
 import bridge.repository.BridgeLength;
 import camp.nextstep.edu.missionutils.Console;
 
@@ -19,8 +20,9 @@ public class InputView {
     /**
      * 사용자가 이동할 칸을 입력받는다.
      */
-    public String readMoving() {
-        return null;
+    public BridgeElement readMoving() {
+        String moving = Console.readLine();
+        return BridgeElement.findByPlayerInput(moving);
     }
 
     /**
